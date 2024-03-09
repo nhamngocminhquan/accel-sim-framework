@@ -11,6 +11,8 @@ config_maps = \
     "TITANK" : set("GeForce GTX TITAN"),
     "QV100" : set(["TITAN V", "Quadro GV100","Tesla V100-SXM2-32GB"]),
     "RTX2060" : set("GeForce RTX 2060"),
+    "RTX2070_S" : set("GeForce RTX 2070 Super"),
+    "RTX2080_S" : set("GeForce RTX 2080 Super"),
     "RTX3070" : set("GeForce RTX 3070"),
 }
 
@@ -169,6 +171,32 @@ correl_list = \
                  "np.average(hw[\"gpc__cycles_elapsed.avg\"]) - np.min(hw[\"gpc__cycles_elapsed.avg\"])",
         sim_eval="float(sim[\"gpu_tot_sim_cycle\s*=\s*(.*)\"])",
         hw_name="GeForce RTX 2060",
+        drophwnumbelow=0,
+        plottype="log",
+        stattype="counter"
+    ),
+    
+	#Turing
+    CorrelStat(chart_name="GeForce RTX 2070 Super Cycles",
+        plotfile="RTX2070_S_cycles",
+        hw_eval="np.average(hw[\"gpc__cycles_elapsed.avg\"])",
+        hw_error="np.max(hw[\"gpc__cycles_elapsed.avg\"]) - np.average(hw[\"gpc__cycles_elapsed.avg\"]),"+\
+                 "np.average(hw[\"gpc__cycles_elapsed.avg\"]) - np.min(hw[\"gpc__cycles_elapsed.avg\"])",
+        sim_eval="float(sim[\"gpu_tot_sim_cycle\s*=\s*(.*)\"])",
+        hw_name="GeForce RTX 2070 Super",
+        drophwnumbelow=0,
+        plottype="log",
+        stattype="counter"
+    ),
+    
+	#Turing
+    CorrelStat(chart_name="GeForce RTX 2080 Super Cycles",
+        plotfile="RTX2080_S_cycles",
+        hw_eval="np.average(hw[\"gpc__cycles_elapsed.avg\"])",
+        hw_error="np.max(hw[\"gpc__cycles_elapsed.avg\"]) - np.average(hw[\"gpc__cycles_elapsed.avg\"]),"+\
+                 "np.average(hw[\"gpc__cycles_elapsed.avg\"]) - np.min(hw[\"gpc__cycles_elapsed.avg\"])",
+        sim_eval="float(sim[\"gpu_tot_sim_cycle\s*=\s*(.*)\"])",
+        hw_name="GeForce RTX 2080 Super",
         drophwnumbelow=0,
         plottype="log",
         stattype="counter"
