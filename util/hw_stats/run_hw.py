@@ -166,7 +166,7 @@ for bench in benchmarks:
                         " | tee cycles.csv; python "+os.path.join(this_directory,"postprocess-nsys-csv.py")+" --path "+this_run_dir
             elif options.nsight_profiler:
                 sh_contents += "\nexport CUDA_VERSION=\"" + cuda_version + "\"; export CUDA_VISIBLE_DEVICES=\"" + options.device_num +\
-                    "\" ; timeout 5m nv-nsight-cu-cli --target-processes all --metrics gpc__cycles_elapsed.avg --csv " +\
+                    "\" ; timeout 5m nv-nsight-cu-cli --target-processes all --metrics device__attribute_display_name,gpc__cycles_elapsed.avg --csv " +\
                         exec_path + " " + str(args) + " | tee " +\
                         os.path.join(this_run_dir,logfile + ".gpc__cycles_elapsed.{0}".format(i))
 
