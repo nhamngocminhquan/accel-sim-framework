@@ -89,12 +89,12 @@ for bench in benchmarks:
             sh_contents += "export TERMINATE_UPON_LIMIT=1; "
             exec_path = '. ' + exec_path
 
-            if(options.kernel_number > 0):
+            if(int(options.kernel_number) > 0):
                 os.environ['DYNAMIC_KERNEL_LIMIT_END'] = str(options.kernel_number)
             else:
                 os.environ['DYNAMIC_KERNEL_LIMIT_END'] = '50'
         else:
-            if(options.kernel_number > 0):
+            if(int(options.kernel_number) > 0):
                 os.environ['DYNAMIC_KERNEL_LIMIT_END'] = str(options.kernel_number)
             else:
                 os.environ['DYNAMIC_KERNEL_LIMIT_END'] = '0'
