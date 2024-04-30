@@ -551,6 +551,9 @@ def parse_hw_csv(csv_file, hw_data, appargs, kdata, logger):
             if state == "header_proc":
                 if "Event result" in row[0]:
                     continue
+                elif "==ERROR==" in row[0]:
+                    print("Warning: HW result file returned with error")
+                    continue
                 header = row
                 count = 0
 
@@ -709,6 +712,8 @@ parser.add_option("-p", "--plotname", dest="plotname", default="",
                        "a concatination of all the configs in the graph are used.")
 parser.add_option("-C", "--logchannel", dest="logchannel", default="",
                   help="Turn on minimal logging. Right now \"hwsummary\" supported.")
+parser.add_option("-O", "--output", dest="output", default="",
+                  help="Specific folder in ./correl-html/ for output")
 
 
 (options, args) = parser.parse_args()
@@ -977,8 +982,9 @@ for cfg,sim_for_cfg in sim_data.items():
             fig_data[ (correl.plotfile, hw_cfg) ] = []
         fig_data[ (correl.plotfile, hw_cfg) ].append((trace, layout, cfg, anno, correl.plotfile, err_dropped_stats, apps_included, correl, hw_low_drop_stats))
 
-
 correl_outdir = os.path.join(this_directory, "correl-html")
+if options.output != "":
+    correl_outdir = os.path.join(correl_outdir, options.output)
 for (plotfile,hw_cfg), traces in fig_data.items():
     make_submission_quality_image(options.image_type, traces, hw_cfg)
 print("Output Available at: file://{0}".format(correl_outdir))
